@@ -1,18 +1,17 @@
 # mySQL_Employee_Tracker
 
-## Desription
+## Description
 This is an easy to use command-line application for non-developers to view and interact with information stored in databases. 
 
 
 
-[![Click to watch](https://youtu.be/oz0AgMqO3v4)](https://www.youtube.com/watch?v=oz0AgMqO3v4)
+[Watch the demo video](https://www.youtube.com/watch?v=oz0AgMqO3v4)
 
 
 ## Table of contents
- * [Installation](#Installation)
- * [Usage](#Usage)
- * [Technologies](#Techologies)
- * [License](#License)
+ * [Installation](#installation)
+ * [Usage](#usage)
+ * [Technologies](#technologies)
 
 
 
@@ -23,6 +22,12 @@ MySQL Workbench
 
 
 
+## Installation
+1. Install [Node.js](https://nodejs.org) and MySQL.
+2. Run `npm install`.
+3. Create the database: `mysql -u root -p < employee_DB.sql`
+4. Copy `.env.EXAMPLE` to `.env` and fill in your MySQL user and password.
+
 ## Usage
-By following the prompt users can easiy navigate through databases easiy. In order to use this command line application, users will need to install node, inquirer, and mysql. 
+Run `npm start` and follow the prompts to view, add, and update departments, roles, and employees. Choose **Exit** when you're done. 
 
