@@ -5,6 +5,8 @@ This is an easy to use command-line application for non-developers to view and i
 
 
 
+**Try it in your browser: https://tferg7.github.io/mySQL_Employee_Tracker/**
+
 [Watch the demo video](https://www.youtube.com/watch?v=oz0AgMqO3v4)
 
 
