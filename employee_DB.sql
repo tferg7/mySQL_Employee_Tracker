@@ -16,7 +16,7 @@ id INTEGER NOT NULL auto_increment PRIMARY KEY,
  title VARCHAR(100) NOT NULL,
  salary DECIMAL (10,2),
  department_id INTEGER,
- FOREIGN KEY (department_id) REFERENCES department(id)
+ FOREIGN KEY (department_id) REFERENCES department(id) ON DELETE SET NULL
 );
 CREATE TABLE employee (
  id INTEGER NOT NULL auto_increment PRIMARY KEY,
@@ -24,52 +24,47 @@ CREATE TABLE employee (
   last_name VARCHAR (30),
   role_id INTEGER,
   manager_id INTEGER NULL,
-  FOREIGN KEY (role_id) REFERENCES role(id),
-  FOREIGN KEY (manager_id) REFERENCES role(id)
+  FOREIGN KEY (role_id) REFERENCES role(id) ON DELETE SET NULL,
+  FOREIGN KEY (manager_id) REFERENCES employee(id) ON DELETE SET NULL
 );
 
 
 -- DEPARTMENT SEEDS -----
 INSERT INTO department (name)
-VALUE ("Sales");
+VALUES ("Sales");
 INSERT INTO department (name)
-VALUE ("Engineering");
+VALUES ("Engineering");
 INSERT INTO department (name)
-VALUE ("Finance");
+VALUES ("Finance");
 INSERT INTO department (name)
-VALUE ("Legal");
+VALUES ("Legal");
 
 -- EMPLOYEE ROLE SEEDS -------
 INSERT INTO role (title, salary, department_id)
-VALUE ("Lead Engineer", 150000, 2);
+VALUES ("Lead Engineer", 150000, 2);
 INSERT INTO role (title, salary, department_id)
-VALUE ("Legal Team Lead", 250000, 4);
+VALUES ("Legal Team Lead", 250000, 4);
 INSERT INTO role (title, salary, department_id)
-VALUE ("Accountant", 125000, 3);
+VALUES ("Accountant", 125000, 3);
 INSERT INTO role (title, salary, department_id)
-VALUE ("Sales Lead", 100000, 1);
+VALUES ("Sales Lead", 100000, 1);
 INSERT INTO role (title, salary, department_id)
-VALUE ("Salesperson", 80000, 1);
+VALUES ("Salesperson", 80000, 1);
 INSERT INTO role (title, salary, department_id)
-VALUE ("Software Engineer", 120000, 2);
+VALUES ("Software Engineer", 120000, 2);
 INSERT INTO role (title, salary, department_id)
-VALUE ("Lawyer", 190000, 4);
+VALUES ("Lawyer", 190000, 4);
 
 -- EMPLOYEE SEEDS -------
+-- Leads are added first (no manager), then the people who report to them
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUE ("Jessica", "Haze", null, 1);
-INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUE ("Tiffany", "Patric", null, 2);
-INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUE ("Mia","Lam",null,3);
-INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUE ("Bently", "Lao", 1, 4);
-INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUE ("Chris", "Melby", 4, 5);
-INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUE ("Jason", "Baker", 1, 6);
-INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUE ("Tom", "Nice", 2, 7);
+VALUES ("Jessica", "Haze", 4, NULL),     -- 1 Sales Lead
+       ("Tiffany", "Patric", 1, NULL),   -- 2 Lead Engineer
+       ("Mia", "Lam", 2, NULL),          -- 3 Legal Team Lead
+       ("Bently", "Lao", 6, 2),          -- 4 Software Engineer -> Tiffany
+       ("Chris", "Melby", 5, 1),         -- 5 Salesperson -> Jessica
+       ("Jason", "Baker", 3, NULL),      -- 6 Accountant
+       ("Tom", "Nice", 7, 3);            -- 7 Lawyer -> Mia
 
 
 SELECT * FROM department;
